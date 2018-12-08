@@ -16,51 +16,51 @@ function makeGuess(attempts, word) {
             ])
             .then(function (input) {
                 var doubleEntry = false;
-                if (input.letter.length > 1){
+                if (input.letter.length > 1) {
                     console.log("Please enter only 1 letter!");
-                    makeGuess(attempts,word);
+                    makeGuess(attempts, word);
                 }
                 else {
-                    guessesMade.forEach(function (guess) {
-                        console.log("guess: "+guess); 
-                        if (guess === input.letter) {
-                            doubleEntry = true;
-                            console.log("You already guessed that letter!");
-                        }
-                        guessesMade.push(input.letter);
-                        
-                    });
-                    if (doubleEntry) 
-                        makeGuess(attempts,word);
-                    else{
-                        if (word.guess(input.letter)) {
-                            console.log("CORRECT!");
-                            if (!word.win())
-                                makeGuess(attempts, word);
-                            else {
-                                attempts = 0;
-                                console.log("You win! Next round!");
-                                fs.readFile('list.txt', 'utf8', function (err, line) {
-                                    if (err)
-                                        console.log(err);
-                                    line = line.split('\n');
-                                    temp = line[Math.floor(Math.random() * line.length)];
-
-                                    var word = new Word(temp);
-                                    var attempts = 10;
-
-                                    makeGuess(attempts, word);
-                                });
-                            }
-
-                        }
+                    if (word.guess(input.letter)) {
+                        console.log("CORRECT!");
+                        if (!word.win())
+                            makeGuess(attempts, word);
                         else {
-                            console.log("INCORRECT. Attemps left: " + (attempts - 1));
-                            makeGuess(attempts - 1, word);
+                            attempts = 0;
+                            console.log("You win! Next round!");
+                            fs.readFile('list.txt', 'utf8', function (err, line) {
+                                if (err)
+                                    console.log(err);
+                                line = line.split('\n');
+                                temp = line[Math.floor(Math.random() * line.length)];
+
+                                var word = new Word(temp);
+                                var attempts = 10;
+
+                                makeGuess(attempts, word);
+                            });
                         }
                     }
+                    else {
+                        console.log("INCORRECT. Attemps left: " + (attempts - 1));
+                        var temp = false;
+                        guessesMade.forEach(function (guess) {
+                            if (guess === input.letter) {
+                                temp = true;
+                            }
+                        });
+                        guessesMade.push(input.letter);
+                        if (temp)
+                            makeGuess(attempts, word);
+                        else
+                            makeGuess(attempts - 1, word);
+                    }
                 }
+                // }
+                //  }
+
             });
+        //  makeGuess(attemps,word);
     }
     else {
         console.log("Game over!");

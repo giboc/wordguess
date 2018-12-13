@@ -42,7 +42,6 @@ function makeGuess(attempts, word) {
                         }
                     }
                     else {
-                        console.log("INCORRECT. Attemps left: " + (attempts - 1));
                         var temp = false;
                         guessesMade.forEach(function (guess) {
                             if (guess === input.letter) {
@@ -50,17 +49,17 @@ function makeGuess(attempts, word) {
                             }
                         });
                         guessesMade.push(input.letter);
-                        if (temp)
+                        if (temp){
+                            console.log("INCORRECT. Attemps left: " + (attempts));
                             makeGuess(attempts, word);
-                        else
+                        }
+                        else{
+                            console.log("INCORRECT. Attemps left: " + (attempts-1));
                             makeGuess(attempts - 1, word);
+                        }
                     }
                 }
-                // }
-                //  }
-
             });
-        //  makeGuess(attemps,word);
     }
     else {
         console.log("Game over!");

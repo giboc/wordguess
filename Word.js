@@ -13,7 +13,6 @@ class Word {
 
     print() {
         var gameWon = true;
-        var reg = new RegExp("['-:',.?;]");
         var temp = "";
         this.word.forEach(function (letter) {
             if (letter.get() === '_')
@@ -46,4 +45,3 @@ class Word {
 }
 console.log("Word.js loaded");
 module.exports = Word;
-

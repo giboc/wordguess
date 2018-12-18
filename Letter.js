@@ -8,7 +8,7 @@ class Letter {
         if (this.guessed === true)
             return this.value;
         else {
-            var reg = new RegExp("['-:',.?; ]");
+            var reg = new RegExp("['-:',.?; ]"); //These aren't considered "letters" so just display them.
             if (reg.test(this.value))
                 return this.value;
             else

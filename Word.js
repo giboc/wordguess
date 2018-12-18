@@ -12,15 +12,11 @@ class Word {
     };
 
     print() {
-        var gameWon = true;
         var temp = "";
         this.word.forEach(function (letter) {
-            if (letter.get() === '_')
-                gameWon = false;
             temp += letter.get() + ' ';
         });
         console.log(temp);
-        return gameWon;
     };
 
     guess(char) {
@@ -34,6 +30,7 @@ class Word {
         this.print();
         return found;
     }
+    
     win() {
         var win = true;
         this.word.forEach(function (letter) {
